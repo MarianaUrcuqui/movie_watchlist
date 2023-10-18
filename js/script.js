@@ -1,5 +1,4 @@
 let moviesArray = []
-let allTitles = []
 let title = ""
 let html = ""
 
@@ -14,13 +13,13 @@ getTitles()
 
 
 function getAllMovies(moviesArray){
-  const titles = moviesArray.map(movie => movie.Title)
+  const titles = moviesArray.map(movie => movie.imdbID)
   for(let title of titles) {
-    title = title.replace(/\s+/g, '-')
-    fetch(`http://www.omdbapi.com/?apikey=86af277f&t=${title}`)
+    fetch(`http://www.omdbapi.com/?apikey=86af277f&i=${title}`)
       .then(res => res.json())
-      .then(data => {
-        getHtml(data)
+      .then(movie => {
+        const rating = movie.Ratings[0].Value
+        getHtml(movie, rating)
         document.getElementById("main").innerHTML = html
       })
   }
@@ -44,9 +43,14 @@ function getAllMovies(moviesArray){
 
 
 
-function getHtml(title){
+function getHtml(title, stars){
   html += `
-  <h1>${title.Title}</h1>
-  <p>${title.Runtime}</p>
+  <div class="movie">
+    <h1 class="movie-title">${title.Title}</h1>
+    <p class="stars">${stars}</p>
+    <p class="runtime">${title.Runtime}</p>
+    <p class="genres">${title.Genre}</p>
+    <p class="plot">${title.Plot}</p>
+  </div>
   `
 }

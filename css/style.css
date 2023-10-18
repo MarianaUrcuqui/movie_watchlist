@@ -106,3 +106,8 @@ header img{
   height: 70px;
   margin-top: 10rem;
 }
+
+.movie{
+  display: grid;
+  grid-template: 1rem repeat(3, auto) 1rem 1rem / 9rem 1rem repeat(3, max-content) ;
+}
