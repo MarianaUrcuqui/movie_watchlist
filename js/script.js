@@ -1,15 +1,24 @@
 let moviesArray = []
-let title = ""
 let html = ""
+
+const searchBtn = document.getElementById("search-btn")
+const inputSearch = document.getElementById("search")
+const placeholderEl = document.getElementById("placeholder")
+
+const search = inputSearch.value
+searchBtn.addEventListener("click", getTitles)
 
 
 async function getTitles(){
-  const res = await fetch('http://www.omdbapi.com/?apikey=86af277f&s=toy-story')
+  html = ""
+  const search = inputSearch.value
+  const title = search.replace(/\s/g, "-")
+  const res = await fetch(`http://www.omdbapi.com/?apikey=86af277f&s=${title}`)
   const data = await res.json()
   moviesArray = data.Search
+  placeholderEl.style.display = "none"
   getAllMovies(moviesArray)
 }
-getTitles()
 
 
 function getAllMovies(moviesArray){
@@ -19,38 +28,30 @@ function getAllMovies(moviesArray){
       .then(res => res.json())
       .then(movie => {
         const rating = movie.Ratings[0].Value
-        getHtml(movie, rating)
+        getHtml(movie, rating.substring(0, 3))
         document.getElementById("main").innerHTML = html
       })
   }
 }
 
-// function getAllMovies(moviesArray){
-//   const titles = moviesArray.map(movie => movie.Title)
-//   for(let title of titles) {
-//     title = title.replace(/\s+/g, '-')
-//     async function intento(){
-//       const res = await fetch(`http://www.omdbapi.com/?apikey=86af277f&t=${title}`)
-//       const data = await res.json()
-//       html += data
-//     }
-//   }
-//   html 
-//   document.getElementById("main").innerHTML += html
-//     }
-  
-    
-
-
 
 function getHtml(title, stars){
   html += `
   <div class="movie">
-    <h1 class="movie-title">${title.Title}</h1>
-    <p class="stars">${stars}</p>
+    <img src="${title.Poster}" class="poster">
+    <div class="title-div">
+      <h4 class="movie-title">${title.Title}</h4>
+      <p class="stars">
+        <img src="../img/icon-star.svg">${stars}
+      </p>
+    </div>
     <p class="runtime">${title.Runtime}</p>
     <p class="genres">${title.Genre}</p>
+    <p class="watchlist"><a href="#">
+      <img src="../img/icon-plus.svg">Watchlist
+    </a></p>
     <p class="plot">${title.Plot}</p>
   </div>
   `
 }
+
