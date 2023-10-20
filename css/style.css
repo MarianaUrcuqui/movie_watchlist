@@ -112,7 +112,6 @@ header img{
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   gap: 1rem;
   align-items: center;
-  color: #ccc;
   width: 100%;
   padding: 1rem ;
 }
@@ -122,6 +121,8 @@ header img{
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  color: #ccc;
 }
 
 .icon{
@@ -136,7 +137,6 @@ header img{
   width: 100%;
   min-height: 16rem;
   border-bottom: #E5E7EB solid 1.5px;
-  color:#000;
   display: grid;
   grid-template: 1rem 1rem minmax(2rem, 2.7rem) 1.5rem auto 1rem 1rem / 
     .5rem 8.5rem 1rem 3rem minmax(7rem, 1fr) auto .5rem;

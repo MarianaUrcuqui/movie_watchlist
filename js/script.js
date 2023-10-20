@@ -4,20 +4,32 @@ let html = ""
 const searchBtn = document.getElementById("search-btn")
 const inputSearch = document.getElementById("search")
 const placeholderEl = document.getElementById("placeholder")
+const mainEl = document.getElementById("main")
+
 
 const search = inputSearch.value
 searchBtn.addEventListener("click", getTitles)
 
 
-async function getTitles(){
+
+//-----------------------
+//----- functions -------
+//-----------------------
+function getTitles(){
   html = ""
   const search = inputSearch.value
-  const title = search.replace(/\s/g, "-")
-  const res = await fetch(`http://www.omdbapi.com/?apikey=86af277f&s=${title}`)
-  const data = await res.json()
-  moviesArray = data.Search
-  placeholderEl.style.display = "none"
-  getAllMovies(moviesArray)
+  const title = search.replace(/\s/g, "-") //With this we are changing for example "game of thrones" to "game-of-thrones"
+  fetch(`http://www.omdbapi.com/?apikey=86af277f&s=${title}`)
+    .then(res => res.json())
+    .then(data =>{
+      if(data.Error){ //If no movies are found
+        handleNoResponse() 
+      }else{
+        moviesArray = data.Search
+        placeholderEl.style.display = "none"
+        getAllMovies(moviesArray)
+      }
+    })
 }
 
 
@@ -29,7 +41,7 @@ function getAllMovies(moviesArray){
       .then(movie => {
         const rating = movie.Ratings[0].Value
         getHtml(movie, rating.substring(0, 3))
-        document.getElementById("main").innerHTML = html
+        mainEl.innerHTML = html
       })
   }
 }
@@ -53,5 +65,14 @@ function getHtml(title, stars){
     <p class="plot">${title.Plot}</p>
   </div>
   `
+}
+
+function handleNoResponse(){
+  const html = `
+    <h3>Unable to find what you’re looking for. Please try another search.</h3>
+  `
+  placeholderEl.style.display = "flex"
+  placeholderEl.innerHTML = html
+  mainEl.innerHTML = ""
 }
 
