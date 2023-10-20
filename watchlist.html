@@ -11,20 +11,18 @@
   <body>
     <header>
       <img src="img/header.jpg" alt="posters of movies">
-      <h1 class="header-title">Find your film</h1>
-      <a href="watchlist.html" class="a-watchlist"><h6 class="watchlist">My watchlist</h6></a>
+      <h1 class="header-title">Watchlist</h1>
+      <a href="index.html" class="a-watchlist"><h6 class="watchlist">Search for movies</h6></a>
     </header>
-    <div class="search">
-      <label for="search" class="search-icon"><img src="img/Search.jpg" alt="search"></label>
-      <input type="text" placeholder="Search for a movie" id="search" class="input-search">
-      <button id="search-btn" type="button" class="search-btn">Search</button>
-    </div>
-    <main id="main" class="main">
-      <!-- MOVIES WILL APPEAR HERE -->
-    </main>
+    <main id="watchlist-main" class="main"></main>
     <div id="placeholder" class="placeholder">
-      <img src="img/Icon.jpg" alt="start exploring" class="icon">
-      <h3>Start exploring</h3>
+      <h3>Your watchlist is looking a little empty...</h3>
+      <div> 
+        <a href="index.html">
+          <img src="../img/icon-plus.svg">
+          <h5>Let’s add some movies!</h5>
+        </a>
+      </div>
     </div>
     <script src="js/script.js"></script>
   </body>

@@ -56,14 +56,14 @@ header img{
 
 .header-title{
   grid-column: 1;
-  margin-left: 2rem;
+  margin-left: 3rem;
 }
 
 .a-watchlist{
   text-decoration: none;
   color: #fff;
   grid-column: 2;
-  margin:0 2rem;
+  margin:0 3rem;
   cursor: pointer;
 
 }
@@ -109,7 +109,7 @@ header img{
 /* ----------------------------- */
 .main{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
   gap: 1rem;
   align-items: center;
   width: 100%;
@@ -123,12 +123,23 @@ header img{
   justify-content: center;
   text-align: center;
   color: #ccc;
+  margin-top: 10rem;
+}
+
+.placeholder a{
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.placeholder a{
+  text-decoration: none;
+  color: #363636;
 }
 
 .icon{
   width: 70px;
   height: 70px;
-  margin-top: 10rem;
 }
 
 .movie{
@@ -192,19 +203,19 @@ header img{
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin-right: .7rem;
+
 }
 
-.watchlist{
+.movie .watchlist{
   grid-area: watchlist;
-  margin-left: 1rem;
-}
-
-.watchlist a{
-  text-decoration: none;
   color: #000;
   display: flex;
   align-items: center;
   gap:.2rem;
+  border: none;
+  background-color: whitesmoke;
+  cursor: pointer;
 }
 
 .plot{
